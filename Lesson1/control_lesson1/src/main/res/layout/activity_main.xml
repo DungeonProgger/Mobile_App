@@ -72,7 +72,7 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextText2"
-        app:layout_constraintVertical_bias="0.104" />
+        app:layout_constraintVertical_bias="0.111" />
 
     <ImageButton
         android:id="@+id/imageButton"

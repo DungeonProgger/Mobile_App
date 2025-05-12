@@ -10,7 +10,7 @@ public class DateClass extends DatePickerDialog {
     private final Calendar initialDate;
 
     public DateClass(Context context, Calendar initialDate, OnDateSetListener listener) {
-        super(context, (datePicker, year, month, day) -> { // Исправленное имя параметра
+        super(context, (datePicker, year, month, day) -> {
                     if (listener != null) {
                         listener.onDateSet(datePicker, year, month, day);
                         initialDate.set(Calendar.YEAR, year);

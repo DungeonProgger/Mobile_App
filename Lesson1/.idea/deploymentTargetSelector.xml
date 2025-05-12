@@ -5,16 +5,13 @@
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="app.control_lesson1">
+      <SelectionState runConfigName="buttonclicker">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
       <SelectionState runConfigName="control_lesson1">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="app.buttonclicker">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="buttonclicker">
+      <SelectionState runConfigName="app.test2">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
