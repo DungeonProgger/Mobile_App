@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.mireaproject.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="com.example.mireaproject.ui.gallery.GalleryFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
+        android:id="@+id/nav_slideshow"
+        android:name="com.example.mireaproject.ui.slideshow.SlideshowFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/mireaInfo"
+        android:name="com.example.mireaproject.MireaInfo"
+        android:label="mirea_info"
+        tools:layout="@layout/mirea_info" />
+    <fragment
+        android:id="@+id/mireaSite"
+        android:name="com.example.mireaproject.MireaSite"
+        android:label="mirea_site"
+        tools:layout="@layout/mirea_site" />
+    <fragment
+        android:id="@+id/gimn"
+        android:name="com.example.mireaproject.Gimn"
+        android:label="fragment_gimn"
+        tools:layout="@layout/fragment_gimn" />
+</navigation>
