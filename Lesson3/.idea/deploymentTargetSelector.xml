@@ -38,10 +38,10 @@
       </SelectionState>
       <SelectionState runConfigName="mireaproject">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-05-14T19:21:20.402658600Z">
+        <DropdownSelection timestamp="2025-05-16T21:53:36.683679500Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\ilyab\.android\avd\Pixel_9.avd" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\ilyab\.android\avd\Pixel_9_3.avd" />
             </handle>
           </Target>
         </DropdownSelection>

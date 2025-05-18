@@ -37,4 +37,29 @@
         android:name="com.example.mireaproject.Gimn"
         android:label="fragment_gimn"
         tools:layout="@layout/fragment_gimn" />
+    <fragment
+        android:id="@+id/barometr"
+        android:name="com.example.mireaproject.Barometr"
+        android:label="fragment_blank"
+        tools:layout="@layout/fragment_blank" />
+    <fragment
+        android:id="@+id/camera"
+        android:name="com.example.mireaproject.Camera"
+        android:label="fragment_camera"
+        tools:layout="@layout/fragment_camera" />
+    <fragment
+        android:id="@+id/audio"
+        android:name="com.example.mireaproject.Audio"
+        android:label="fragment_audio"
+        tools:layout="@layout/fragment_audio" />
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.example.mireaproject.Profile"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/changer"
+        android:name="com.example.mireaproject.Changer"
+        android:label="fragment_changer"
+        tools:layout="@layout/fragment_changer" />
 </navigation>

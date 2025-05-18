@@ -5,6 +5,10 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/profile"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="Profile" />
+        <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_home" />
@@ -28,5 +32,21 @@
             android:id="@+id/gimn"
             android:icon="@android:drawable/ic_media_play"
             android:title="Music" />
+        <item
+            android:id="@+id/barometr"
+            android:icon="@android:drawable/ic_menu_upload"
+            android:title="Baromentr" />
+        <item
+            android:id="@+id/camera"
+            android:icon="@android:drawable/ic_menu_camera"
+            android:title="CameraApp" />
+        <item
+            android:id="@+id/audio"
+            android:icon="@android:drawable/ic_btn_speak_now"
+            android:title="Voice recorder" />
+        <item
+            android:id="@+id/changer"
+            android:icon="@android:drawable/ic_menu_edit"
+            android:title="FileChanger" />
     </group>
 </menu>
