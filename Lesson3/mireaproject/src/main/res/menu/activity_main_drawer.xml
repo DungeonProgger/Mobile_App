@@ -5,6 +5,10 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/auth"
+            android:icon="@android:drawable/ic_lock_idle_lock"
+            android:title="Auth" />
+        <item
             android:id="@+id/profile"
             android:icon="@drawable/ic_launcher_foreground"
             android:title="Profile" />
@@ -48,5 +52,9 @@
             android:id="@+id/changer"
             android:icon="@android:drawable/ic_menu_edit"
             android:title="FileChanger" />
+        <item
+            android:id="@+id/net"
+            android:icon="@android:drawable/ic_menu_compass"
+            android:title="NetData" />
     </group>
 </menu>
