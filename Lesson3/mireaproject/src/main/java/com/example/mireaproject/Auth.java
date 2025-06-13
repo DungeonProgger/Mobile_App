@@ -13,15 +13,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
-import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 
 public class Auth extends Fragment implements View.OnClickListener {
@@ -44,11 +46,12 @@ public class Auth extends Fragment implements View.OnClickListener {
 
     private FirebaseAuth mAuth;
 
+    private View rootView; // Добавлено, чтобы использовать в updateUI
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_auth, container, false);
+        rootView = inflater.inflate(R.layout.fragment_auth, container, false);
 
         // Views
         mStatusTextView = rootView.findViewById(R.id.statusTextView);
@@ -73,7 +76,7 @@ public class Auth extends Fragment implements View.OnClickListener {
         mSignOutButton.setOnClickListener(this);
         mVerifyEmailButton.setOnClickListener(this);
 
-        // Initialize Firebase Auth
+        // Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
         return rootView;
@@ -88,9 +91,8 @@ public class Auth extends Fragment implements View.OnClickListener {
 
     private void createAccount(String email, String password) {
         Log.d(TAG, "createAccount:" + email);
-        if (!validateForm()) {
-            return;
-        }
+        if (!validateForm()) return;
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
@@ -101,21 +103,7 @@ public class Auth extends Fragment implements View.OnClickListener {
                             updateUI(user);
                         } else {
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            try {
-                                throw task.getException();
-                            } catch (FirebaseAuthWeakPasswordException e) {
-                                mPasswordField.setError(getString(R.string.error_weak_password));
-                                mPasswordField.requestFocus();
-                            } catch (FirebaseAuthInvalidCredentialsException e) {
-                                mEmailField.setError(getString(R.string.error_invalid_email));
-                                mEmailField.requestFocus();
-                            } catch (FirebaseAuthUserCollisionException e) {
-                                mEmailField.setError(getString(R.string.error_email_exists));
-                                mEmailField.requestFocus();
-                            } catch (Exception e) {
-                                Toast.makeText(getActivity(), getString(R.string.auth_failed) + ": " + e.getMessage(),
-                                        Toast.LENGTH_SHORT).show();
-                            }
+                            handleAuthError(task.getException());
                             updateUI(null);
                         }
                     }
@@ -124,9 +112,8 @@ public class Auth extends Fragment implements View.OnClickListener {
 
     private void signIn(String email, String password) {
         Log.d(TAG, "signIn:" + email);
-        if (!validateForm()) {
-            return;
-        }
+        if (!validateForm()) return;
+
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
@@ -137,14 +124,7 @@ public class Auth extends Fragment implements View.OnClickListener {
                             updateUI(user);
                         } else {
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            try {
-                                throw task.getException();
-                            } catch (FirebaseAuthInvalidCredentialsException e) {
-                                Toast.makeText(getActivity(), getString(R.string.error_sign_in_failed), Toast.LENGTH_SHORT).show();
-                            } catch (Exception e) {
-                                Toast.makeText(getActivity(), getString(R.string.auth_failed) + ": " + e.getMessage(),
-                                        Toast.LENGTH_SHORT).show();
-                            }
+                            handleAuthError(task.getException());
                             updateUI(null);
                         }
                     }
@@ -201,6 +181,24 @@ public class Auth extends Fragment implements View.OnClickListener {
         return valid;
     }
 
+    private void handleAuthError(Exception exception) {
+        try {
+            throw exception;
+        } catch (FirebaseAuthWeakPasswordException e) {
+            mPasswordField.setError(getString(R.string.error_weak_password));
+            mPasswordField.requestFocus();
+        } catch (FirebaseAuthInvalidCredentialsException e) {
+            mEmailField.setError(getString(R.string.error_invalid_email));
+            mEmailField.requestFocus();
+        } catch (FirebaseAuthUserCollisionException e) {
+            mEmailField.setError(getString(R.string.error_email_exists));
+            mEmailField.requestFocus();
+        } catch (Exception e) {
+            Toast.makeText(getActivity(), getString(R.string.auth_failed) + ": " + e.getMessage(),
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void updateUI(FirebaseUser user) {
         if (user != null) {
             mStatusTextView.setText(getString(R.string.emailpassword_status_fmt,
@@ -212,6 +210,13 @@ public class Auth extends Fragment implements View.OnClickListener {
             mSignedInButtons.setVisibility(View.VISIBLE);
 
             mVerifyEmailButton.setEnabled(!user.isEmailVerified());
+
+            ((MainActivity) requireActivity()).enableNavigationMenu();
+
+            // Навигация на главный экран
+            NavController navController = Navigation.findNavController(rootView);
+            navController.navigate(R.id.nav_home);
+
         } else {
             mStatusTextView.setText(R.string.signed_out);
             mDetailTextView.setText(null);
